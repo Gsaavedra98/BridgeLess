@@ -13,7 +13,7 @@ public class Grow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(target,new Vector3(transform.position.x,transform.position.y + 2f, 0f), Quaternion.identity);
+        
     }
 
     // Update is called once per frame
@@ -48,9 +48,11 @@ public class Grow : MonoBehaviour
     {
         float step = speed * Time.deltaTime;
         yield return new WaitForSeconds(5f);
+        
         GameObject.Find("Player").transform.position = Vector3.MoveTowards(GameObject.Find("Player").transform.position, target.transform.position, step);
         if (!jump)
         {
+            Instantiate(target, target.transform.position, Quaternion.identity);
             GameObject.Find("Player").GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
             jump = true;
         }
